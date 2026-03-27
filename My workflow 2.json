@@ -1,0 +1,164 @@
+{
+  "name": "My workflow 2",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        0,
+        0
+      ],
+      "id": "0305ebb9-e25d-45a8-8a07-4ba44780447b",
+      "name": "When chat message received",
+      "webhookId": "932a2f10-8aa2-444b-90e7-29fba24ff5c2"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        208,
+        32
+      ],
+      "id": "5c20156a-c65d-4e06-80a9-fcd5232143c6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        80,
+        160
+      ],
+      "id": "b1ad639d-60c3-47f5-baef-9f63b24e85c1",
+      "name": "OpenAI Chat Model",
+      "alwaysOutputData": true,
+      "executeOnce": false,
+      "credentials": {
+        "openAiApi": {
+          "id": "fzstSl0UQ0wOzwYb",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        224,
+        240
+      ],
+      "id": "86be3ed7-2f15-4dec-83ef-1da508eba5eb",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appuJkHOaZ9FaDNsf",
+          "mode": "list",
+          "cachedResultName": "Book Inventory Manager",
+          "cachedResultUrl": "https://airtable.com/appuJkHOaZ9FaDNsf"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblaTKR1WD7xAceP1",
+          "mode": "list",
+          "cachedResultName": "Books",
+          "cachedResultUrl": "https://airtable.com/appuJkHOaZ9FaDNsf/tblaTKR1WD7xAceP1"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.2,
+      "position": [
+        368,
+        240
+      ],
+      "id": "3cd914c3-ea40-48c4-8391-c33b96e14f03",
+      "name": "Search records in Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "8HoRziODwCybEold",
+          "name": "Airtable Personal Access Token account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records in Airtable": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "d86e91ab-56e5-4639-b0d7-63ad7d309450",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "c02b2d6814215c3bb6a7e9711ddf9c1525b34c9ab711ec4874cd57e2405a1a23"
+  },
+  "id": "v32are7cBzfMx79r",
+  "tags": []
+}
